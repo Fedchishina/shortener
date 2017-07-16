@@ -23,6 +23,7 @@ class CreateUrlsTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
+            $table->integer('count_clicks')->default(0);
             $table->timestamps();
         });
     }

@@ -1,24 +1,37 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+
+        @if ($errors->has('unknown_url'))
+            <span class="help-block">
+                <strong>{{$errors->first('unknown_url')}}</strong>
+            </span>
+        @endif
+
         <h1 class="index-title">
             Shortener URL Generator
         </h1>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <form class="index-form" role="form">
+                    <form method="post" action="{{ route('generate') }}" class="index-form" role="form">
+                        {{csrf_field()}}
                         <div class="form-group">
                             <label for="long_url">
-                                Enter your url
+                                Enter your url:
                             </label>
-                            <input type="long_url" class="form-control" id="long_url">
+                            <input type="text" class="form-control" id="long_url" name="long_url" value="{{old('long_url')}}">
+                            @if ($errors->has('long_url'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('long_url') }}</strong>
+                                </span>
+                            @endif
                         </div>
                         <div class="form-group form-group--disabled">
                             <label for="short_url">
-                                Generated url (you can change it):
+                                Generated url:
                             </label>
-                            <input type="long_url" class="form-control" id="short_url">
+                            <input type="text" class="form-control" id="short_url" name="short_url" disabled>
                         </div>
                         <button type="submit" class="btn btn-default">
                             Generate short url
@@ -26,7 +39,19 @@
                     </form>
                 </div>
             </div>
-            @if (\Illuminate\Support\Facades\Auth::check())
+
+            @if(\Session::has('shortUrlLink'))
+                <div class="row">
+                    <label for="generate_url">
+                        Generated url:
+                    </label>
+                    <a id="generate_url" href="{{\Session::get('shortUrlLink')}}" target="_blank">
+                        {{\Session::get('shortUrlLink')}}
+                    </a>
+                </div>
+            @endif
+
+            @if (\Auth::check())
                 @include('pages.index.table')
             @endif
         </div>

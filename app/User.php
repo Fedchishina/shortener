@@ -27,5 +27,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function urls() {
+        return  $this->hasMany('App\Url', 'user_id', 'id');
+    }
+
 
 }

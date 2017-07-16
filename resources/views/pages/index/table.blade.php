@@ -1,5 +1,5 @@
 <h4>
-    Your generated urls:
+    Your {{$urls->total()}} generated urls:
 </h4>
 <div class="row">
     <div class="col-md-12">
@@ -14,82 +14,24 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>
-                    1
-                </td>
-                <td>
-                    TB - Monthly
-                </td>
-                <td>
-                    01/04/2012
-                </td>
-                <td>
-                    Default
-                </td>
-                <td>
-                    <a class="btn btn-default modal-edit-position" href="#modal-container-edit-position" role="button" class="btn" data-toggle="modal">
-                        Edit
-                    </a>
-                </td>
-            </tr>
-            <tr class="active">
-                <td>
-                    1
-                </td>
-                <td>
-                    TB - Monthly
-                </td>
-                <td>
-                    01/04/2012
-                </td>
-                <td>
-                    Approved
-                </td>
-            </tr>
-            <tr class="success">
-                <td>
-                    2
-                </td>
-                <td>
-                    TB - Monthly
-                </td>
-                <td>
-                    02/04/2012
-                </td>
-                <td>
-                    Declined
-                </td>
-            </tr>
-            <tr class="warning">
-                <td>
-                    3
-                </td>
-                <td>
-                    TB - Monthly
-                </td>
-                <td>
-                    03/04/2012
-                </td>
-                <td>
-                    Pending
-                </td>
-            </tr>
-            <tr class="danger">
-                <td>
-                    4
-                </td>
-                <td>
-                    TB - Monthly
-                </td>
-                <td>
-                    04/04/2012
-                </td>
-                <td>
-                    Call in to confirm
-                </td>
-            </tr>
+            @foreach($urls as $url)
+                <tr>
+                    <td>{{ $url->long_url }}</td>
+                    <td>{{ $url->created_at }}</td>
+                    <td>
+                        <a href="{{ url('/') . '/' . $url->short_url }}" target="_blank">{{url('/') . '/'. $url->short_url}}</a>
+                    </td>
+                    <td>{{$url->count_clicks}}</td>
+                    <td>
+                        <a class="btn btn-default btn-edit" href="#modal-container-edit-url" role="button" class="btn" data-toggle="modal" data-id="{{$url->id}}" data-url="{{$url->short_url}}">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
+    {{$urls->links()}}
+    @include('pages.modal.url.edit')
 </div>
