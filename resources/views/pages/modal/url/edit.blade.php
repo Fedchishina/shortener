@@ -1,6 +1,6 @@
 <div class="modal fade" id="modal-container-edit-url" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="/url/edit" method="POST" role="form">
+        <form action="/url/edit" method="POST" role="form" class="edit-form">
             {{csrf_field()}}
             <div class="modal-content">
                 <div class="modal-header">
@@ -21,9 +21,14 @@
                     <div class="form-group">
                         <input type="hidden" value="" name="id">
                     </div>
+                    <div class="form-group">
+                        <div class="error-list">
+
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                    <button type="button" class="btn btn-default btn-close" data-dismiss="modal">
                         Close
                     </button>
                     <button type="submit" class="btn btn-primary">

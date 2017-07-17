@@ -90,6 +90,7 @@ class UrlController extends Controller
         Url::where('id', $input['id'])->update([
             'short_url' => $input['short_url']
         ]);
-        return redirect('/');
+        $urls = \Auth::user()->urls()->paginate(5);
+        return view('pages.index.table', compact('urls'));
     }
 }

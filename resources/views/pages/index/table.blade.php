@@ -33,5 +33,4 @@
         </table>
     </div>
     {{$urls->links()}}
-    @include('pages.modal.url.edit')
 </div>

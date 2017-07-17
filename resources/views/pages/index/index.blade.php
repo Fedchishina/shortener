@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-
+{{--{{dd($errors)}}--}}
         @if ($errors->has('unknown_url'))
             <span class="help-block">
                 <strong>{{$errors->first('unknown_url')}}</strong>
@@ -52,7 +52,10 @@
             @endif
 
             @if (\Auth::check())
-                @include('pages.index.table')
+                <div class="table-content">
+                    @include('pages.index.table')
+                </div>
+                @include('pages.modal.url.edit')
             @endif
         </div>
     </div>
