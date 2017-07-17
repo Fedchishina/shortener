@@ -15,6 +15,6 @@ Route::get('/', 'Controller@getIndex');
 
 //-- urls --
 Route::post('/url/generate', 'UrlController@postUrlGenerate')->name('generate');
-Route::post('/url/edit', 'UrlController@postUrlEdit')->name('generate');
+Route::post('/url/edit', 'UrlController@postUrlEdit')->name('edit');
 Route::get('/{url}', 'UrlController@getUrlRedirect');
 
