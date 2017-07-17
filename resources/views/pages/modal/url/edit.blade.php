@@ -1,6 +1,6 @@
 <div class="modal fade" id="modal-container-edit-url" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="/url/edit" method="POST" role="form" class="edit-form">
+        <form action="{{ route('edit') }}" method="post" role="form" class="edit-form">
             {{csrf_field()}}
             <div class="modal-content">
                 <div class="modal-header">

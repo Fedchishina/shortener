@@ -61,6 +61,7 @@ return [
             'database' => env('DB_DATABASE', 'forge'),
             'username' => env('DB_USERNAME', 'forge'),
             'password' => env('DB_PASSWORD', ''),
+            'options' => [PDO::ATTR_EMULATE_PREPARES => true],
             'charset' => 'utf8',
             'prefix' => '',
             'schema' => 'public',
