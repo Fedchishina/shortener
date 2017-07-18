@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
-{{--{{dd($errors)}}--}}
+
         @if ($errors->has('unknown_url'))
             <span class="help-block">
                 <strong>{{$errors->first('unknown_url')}}</strong>
@@ -24,6 +24,17 @@
                             @if ($errors->has('long_url'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('long_url') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            <label for="short_url">
+                                Enter short url (if you want):
+                            </label>
+                            <input type="text" class="form-control" id="short_url" name="short_url" value="{{old('short_url')}}">
+                            @if ($errors->has('short_url'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('short_url') }}</strong>
                                 </span>
                             @endif
                         </div>

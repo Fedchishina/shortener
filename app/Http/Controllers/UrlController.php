@@ -20,14 +20,19 @@ class UrlController extends Controller
     {
         $input = $request->all();
 
-        //generating short url
-        $urls = Url::get();
-        $shortUrl = $this->generateShortUrl();
-        $countUrls = $urls->where('short_url',$shortUrl)->count();
-        while ($countUrls > 0 ) {
+        if(isset($input['short_url'])) {
+            $shortUrl = $input['short_url'];
+        } else {
+            //generating short url
+            $urls = Url::get();
             $shortUrl = $this->generateShortUrl();
             $countUrls = $urls->where('short_url',$shortUrl)->count();
+            while ($countUrls > 0 ) {
+                $shortUrl = $this->generateShortUrl();
+                $countUrls = $urls->where('short_url',$shortUrl)->count();
+            }
         }
+
         //verifying authorization
         $userId = Auth::check() ? Auth::user()->id : null;
 
