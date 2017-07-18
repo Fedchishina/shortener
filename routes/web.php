@@ -15,6 +15,12 @@ Route::get('/', 'Controller@getIndex');
 
 //-- urls --
 Route::post('/url/generate', 'UrlController@postUrlGenerate')->name('generate');
-Route::post('/url/edit', 'UrlController@postUrlEdit')->name('edit');
+Route::group([
+    'middleware' => 'check_edit_url'
+], function () {
+    Route::post('/url/edit', 'UrlController@postUrlEdit')->name('edit');
+});
+
+
 Route::get('/{url}', 'UrlController@getUrlRedirect');
 
