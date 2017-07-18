@@ -69,7 +69,7 @@ class UrlController extends Controller
      */
     public function generateShortUrl()
     {
-        $length = rand(5,10);
+        $length = 6;
         $chars = 'abdefhiknrstyzABDEFGHKNQRSTYZ23456789';
         $numChars = strlen($chars);
         $string = '';
