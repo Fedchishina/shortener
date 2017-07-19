@@ -98,4 +98,9 @@ class UrlController extends Controller
         $urls = \Auth::user()->urls()->paginate(5);
         return view('pages.index.table', compact('urls'));
     }
+
+    public function getUrlErrorMessage()
+    {
+        return view('pages.messages.error');
+    }
 }

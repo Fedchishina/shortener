@@ -21,12 +21,13 @@ class CheckEditUrl
         if (\Auth::check()) {
             $user = \Auth::user();
             $url = Url::where('id', $input['id'])->first();
-            if ($user->id <> $url->user_id) {
-
+            if ($user->id == $url->user_id) {
                 return $next($request);
             } else {
-                return redirect('/')->withErrors(array('foreign url' => 'You are trying to edit foreign url'));
+                return redirect()->route('url-error-message')
+                    ->withErrors(array('foreign_url' => $errorText));
             }
-        } return redirect('/')->withErrors(array('foreign url' => 'You are trying to edit foreign url'));
+        } return redirect()->route('url-error-message')
+            ->withErrors(array('foreign_url' => $errorText));
     }
 }

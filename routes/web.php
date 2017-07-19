@@ -23,4 +23,4 @@ Route::group([
 
 
 Route::get('/{url}', 'UrlController@getUrlRedirect');
-
+Route::get('/url/error', 'UrlController@getUrlErrorMessage')->name('url-error-message');
