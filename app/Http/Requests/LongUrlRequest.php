@@ -24,7 +24,7 @@ class LongUrlRequest extends FormRequest
     public function rules()
     {
         return [
-            'long_url' => 'required|url',
+            'long_url' => 'required|url|active_url',
             'short_url' => 'unique:urls,short_url,',
         ];
     }
