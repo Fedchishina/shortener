@@ -62,7 +62,7 @@ class UrlController extends Controller
                 'count_clicks' => $urlObj->count_clicks + 1,
             ]);
 
-            return redirect()->intended($urlObj->long_url);
+            return redirect()->intended($urlObj->long_url, 301);
         } else {
             return redirect('/')->withErrors(array('unknown_url' => 'Unknown url'));
         }
