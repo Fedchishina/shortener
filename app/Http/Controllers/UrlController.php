@@ -19,13 +19,14 @@ class UrlController extends Controller
     public function postUrlGenerate(LongUrlRequest $request)
     {
         $input = $request->all();
-
+        //if user send short url
         if(isset($input['short_url'])) {
             $shortUrl = $input['short_url'];
         } else {
             //generating short url
             $urls = Url::get();
             $shortUrl = $this->generateShortUrl();
+            //verifying is it generated short url in DB
             $countUrls = $urls->where('short_url',$shortUrl)->count();
             while ($countUrls > 0 ) {
                 $shortUrl = $this->generateShortUrl();
@@ -42,7 +43,7 @@ class UrlController extends Controller
             'short_url' => $shortUrl,
             'user_id' => $userId
         ]);
-
+        //getting redirect url on main page of site with generated short url
         $shortUrlLink = url('/') . '/' . $shortUrl;
 
         return redirect()->back()->with('shortUrlLink',$shortUrlLink);
@@ -53,15 +54,17 @@ class UrlController extends Controller
      * @param $url - short url
      * @return $this|\Illuminate\Http\RedirectResponse - redirect to long url
      */
-    public function getUrlRedirect($url)
+    public function getUrlRedirect($shortUrl)
     {
-        $urlObj = Url::where('short_url',$url)->first();
+        //find url object by short url
+        $urlObj = Url::where('short_url',$shortUrl)->first();
 
         if ($urlObj) {
-            Url::where('short_url',$url)->update([
+            //updating count of click on founded url
+            Url::where('short_url',$shortUrl)->update([
                 'count_clicks' => $urlObj->count_clicks + 1,
             ]);
-
+            //redirecting on long url
             return redirect()->intended($urlObj->long_url, 301);
         } else {
             return redirect('/')->withErrors(array('unknown_url' => 'Unknown url'));
@@ -92,13 +95,18 @@ class UrlController extends Controller
     public function postUrlEdit(ShortUrlRequest $request)
     {
         $input = $request->all();
+        //updating short url
         Url::where('id', $input['id'])->update([
             'short_url' =>$input['short_url']
         ]);
+        //getting generated url of auth user
         $urls = \Auth::user()->urls()->paginate(5);
         return view('pages.index.table', compact('urls'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View return view with error messeges
+     */
     public function getUrlErrorMessage()
     {
         return view('pages.messages.error');
