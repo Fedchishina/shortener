@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -28,7 +28,7 @@ class User extends Authenticatable
     ];
 
     public function urls() {
-        return  $this->hasMany('App\Url', 'user_id', 'id');
+        return  $this->hasMany('App\Models\Url', 'user_id', 'id');
     }
 
 
