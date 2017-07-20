@@ -14,7 +14,12 @@ Auth::routes();
 Route::get('/', 'Controller@getIndex');
 
 //-- urls --
-Route::post('/url/generate', 'UrlController@postUrlGenerate')->name('generate');
+Route::group([
+    'middleware' => 'check_value_short_url'
+], function () {
+    Route::post('/url/generate', 'UrlController@postUrlGenerate')->name('generate');
+});
+
 Route::group([
     'middleware' => 'check_edit_url'
 ], function () {

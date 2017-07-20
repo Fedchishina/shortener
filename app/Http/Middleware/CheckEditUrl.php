@@ -22,6 +22,9 @@ class CheckEditUrl
             $user = \Auth::user();
             $url = Url::where('id', $input['id'])->first();
             if ($user->id == $url->user_id) {
+                $input = $request->all();
+                $input['short_url'] = str_slug(strip_tags($input['short_url']));
+                $request->replace($input);
                 return $next($request);
             } else {
                 return redirect()->route('url-error-message')

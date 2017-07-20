@@ -28,4 +28,6 @@ class LongUrlRequest extends FormRequest
             'short_url' => 'unique:urls,short_url,',
         ];
     }
+
+
 }

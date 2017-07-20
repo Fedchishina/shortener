@@ -58,5 +58,6 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'check_edit_url' => \App\Http\Middleware\CheckEditUrl::class,
+        'check_value_short_url' => \App\Http\Middleware\CheckValueShortUrl::class,
     ];
 }
