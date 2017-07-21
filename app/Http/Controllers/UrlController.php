@@ -20,7 +20,7 @@ class UrlController extends Controller
     {
         $input = $request->all();
         //if user send short url
-        if(isset($input['short_url'])) {
+        if(isset($input['short_url'])&& (!(empty($input['short_url'])))) {
             $shortUrl = $input['short_url'];
         } else {
             //generating short url
