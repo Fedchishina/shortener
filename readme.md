@@ -18,4 +18,4 @@
 - It is also possible to edit the generated short url to authorized users
 
 ## Example of project
-http://shortener.comeze.com/public/
+http://shortener.comeze.com
